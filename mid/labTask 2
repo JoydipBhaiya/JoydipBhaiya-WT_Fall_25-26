@@ -21,4 +21,34 @@
            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
            margin-bottom: 20px;
        }
+
+       iinput, button {
+           width: 100%;
+           padding: 5px;
+           margin-top: 10px;
+           border: 1px solid #ccc;
+           border-radius: 5px;
+       }
+         button {
+              background-color: #003366;
+              color: white;
+              border: none;
+              cursor: pointer;
+         }
+            button:hover {
+                background-color: #0059aa;
+            }
+
+            #success {
+                color: green;
+                text-align: center;
+                margin-top: 20px;
+                font-size: 16px;
+            }
+
+            #error {
+                color: red;
+                text-align: center;
+                margin-top: 10px;
+            }
     </style>
