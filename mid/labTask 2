@@ -1,150 +1,164 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lab Task 2</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 30px;
-            background-color: #f0f8ff;
-        }
-        h1 {
-            text-align: center;
-            color: #003366;
-        }
-       form,.box{
-           background-color: #ffffff;
-           padding: 20px;
-           border-radius: 10px;
-           width: 350px;
-           margin: 0 auto;
-           box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-           margin-bottom: 20px;
-       }
+  <title>Lab 2 – Participant System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f0f8ff;
+    }
 
-       iinput, button {
-           width: 100%;
-           padding: 5px;
-           margin-top: 10px;
-           border: 1px solid #ccc;
-           border-radius: 5px;
-       }
-         button {
-              background-color: #003366;
-              color: white;
-              border: none;
-              cursor: pointer;
-         }
-            button:hover {
-                background-color: #0059aa;
-            }
+    h2 {
+      text-align: center;
+      color: #003366;
+    }
 
-            #success {
-                color: green;
-                text-align: center;
-                margin-top: 20px;
-                font-size: 16px;
-            }
+    form, .box {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      width: 350px;
+      margin: 0 auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
 
-            #error {
-                color: red;
-                text-align: center;
-                margin-top: 10px;
-            }
+    input, button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
 
-            .activity-item {
-                background-color: #eef4ff;
-                padding: 8px;
-                border-radius: 5px;
-                margin-top: 8px;
-                padding: 8px;
-                display:flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            .delete-btn {
-                background-color: #ff4d4d;
-                border: none;
-                color: white;
-                padding: 5px 8px;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-    </style>    
+    button {
+      background-color: #003366;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0055aa;
+    }
+
+    #success {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 16px;
+      color: green;
+    }
+
+    #error {
+      margin-top: 10px;
+      color: red;
+      text-align: center;
+    }
+
+    .activity-item {
+      background: #eef4ff;
+      padding: 8px;
+      margin-top: 8px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .remove-btn {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 5px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <h2>Participant Registration  </h2>
-    <body onsubmit="return registerUser()">
-        <label>Full Name:</label>
+
+  <h2>Participant Registration</h2>
+
+  <form onsubmit="return registerUser()">
+    <label>Full Name:</label>
     <input type="text" id="fullName" />
     <label>Email:</label>
-    <input type="email" id="email" />
-    <label>Contact Number:</label>
-    <input type="text" id="contactNumber" />    
+    <input type="text" id="email" />
+    <label>Phone Number:</label>
+    <input type="text" id="phone" />
     <label>Password:</label>
     <input type="password" id="password" />
     <label>Confirm Password:</label>
     <input type="password" id="confirmPassword" />
     <button type="submit">Register</button>
-    <div id="success"></div>
-    <div id="error"></div>
+  </form>
+  <div id="error"></div>
+  <div id="success"></div>
 
-    <h3>Activity Selection</h3>
+  <h2>Activity Selection</h2>
 
-    <div class="box">
-        <label>Activity Name:  </label>
-        <input type="text" id="activityName" />
-        <button type="button" onclick="addActivity()">Add Activity</button>
-       <div id="activities"></div>
-    </div>
+  <div class="box">
+    <label>Activity Name:</label>
+    <input type="text" id="activityName">
+    <button onclick="addActivity()">Add Activity</button>
+    <div id="activityList"></div>
+  </div>
 
-    <script>
-        function registerUser() {
-            var name = document.getElementById("fullName").value.trim();
-            var email = document.getElementById("email").value.trim();
-            var phone = document.getElementById("phone").value.trim();    
-            var password = document.getElementById("password").value;
-            var confirm = document.getElementById("confirmPassword").value;
+  <script>
+    function registerUser() {
+      var name = document.getElementById("fullName").value.trim();
+      var email = document.getElementById("email").value.trim();
+      var phone = document.getElementById("phone").value.trim();
+      var pass = document.getElementById("password").value;
+      var confirm = document.getElementById("confirmPassword").value;
+      var errorDiv = document.getElementById("error");
+      var successDiv = document.getElementById("success");
+      errorDiv.innerHTML = "";
+      successDiv.innerHTML = "";
 
-            var errorDiv = document.getElementById("error");
-            var successDiv = document.getElementById("success");
-            errorDiv.innerHTML = "";
-            successDiv.innerHTML = "";
-            if (!name || !email || !phone || !password || !confirm) {
-                errorDiv.innerHTML = "All fields are required.";
-                return false;
-            }
-            if (!email.includes("@")) {
-                errorDiv.innerHTML = "Invalid email format.";
-                return false;
-            }
-            if (!/^\[0-9]+$/.test(phone)) {
-                errorDiv.innerHTML = "Invalid phone number.";
-                return false;
-            }
-            if (password !== confirm) {
-                errorDiv.innerHTML = "Passwords do not match.";
-                return false;
-            }
-            successDiv.innerHTML = `Registration successful!<br><br>
-            Name: ${name}<br>
-            Email: ${email}<br>    
-            Phone: ${phone}<br>
-            
-            `;
-            return false;
-        }
-        function addActivity() {
-            var activity = document.getElementById("activityName").value.trim();
-            if (!activity==="")
-            return
-        var list = document.getElementById("activitylist");
-        var div = document.createElement("div");
-        div.className = "activity-item";
-        div.innerHTML = `${activity} <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>`;
-        list.appendChild(div);
-        document.getElementById("activityName").value = "";
-        }
-    </script>
-    </body>
-</form>
+      if (name === "" || email === "" || phone === "" || pass === "" || confirm === "") {
+        errorDiv.innerHTML = "Please fill in all fields.";
+        return false;
+      }
+
+      if (!email.includes("@")) {
+        errorDiv.innerHTML = "Invalid Email format.";
+        return false;
+      }
+
+      if (!/^[0-9]+$/.test(phone)) {
+        errorDiv.innerHTML = "Invalid Phone Number.";
+        return false;
+      }
+
+      if (pass !== confirm) {
+        errorDiv.innerHTML = "Passwords do not match.";
+        return false;
+      }
+
+      successDiv.innerHTML = `
+        <strong>Registration Successful!</strong><br><br>
+        Name: ${name}<br>
+        Email: ${email}<br>
+        Phone: ${phone}
+      `;
+
+      return false;
+    }
+
+    function addActivity() {
+      var activity = document.getElementById("activityName").value.trim();
+      if (activity === "") return;
+      var list = document.getElementById("activityList");
+      var div = document.createElement("div");
+      div.className = "activity-item";
+      div.innerHTML = `
+        ${activity}
+        <button class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
+      `;
+      list.appendChild(div);
+      document.getElementById("activityName").value = "";
+    }
+  </script>
+</body>
+</html>
