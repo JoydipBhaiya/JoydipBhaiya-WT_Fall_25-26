@@ -70,4 +70,22 @@
                 border-radius: 5px;
                 cursor: pointer;
             }
-    </style>
+    </style>    
+</head>
+<body>
+    <h2>Participant Registration  </h2>
+    <form onsubmit="return registerUser()">
+        <label>Full Name:</label>
+    <input type="text" id="fullName" />
+    <label>Email:</label>
+    <input type="email" id="email" />
+    <label>Contact Number:</label>
+    <input type="text" id="contactNumber" />    
+    <label>Password:</label>
+    <input type="password" id="password" />
+    <label>Confirm Password:</label>
+    <input type="password" id="confirmPassword" />
+    <button type="submit">Register</button>
+    <div id="success"></div>
+    <div id="error"></div>
+</form>
