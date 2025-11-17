@@ -74,7 +74,7 @@
 </head>
 <body>
     <h2>Participant Registration  </h2>
-    <form onsubmit="return registerUser()">
+    <body onsubmit="return registerUser()">
         <label>Full Name:</label>
     <input type="text" id="fullName" />
     <label>Email:</label>
@@ -133,4 +133,18 @@
             
             `;
             return false;
+        }
+        function addActivity() {
+            var activity = document.getElementById("activityName").value.trim();
+            if (!activity==="")
+            return
+        var list = document.getElementById("activitylist");
+        var div = document.createElement("div");
+        div.className = "activity-item";
+        div.innerHTML = `${activity} <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>`;
+        list.appendChild(div);
+        document.getElementById("activityName").value = "";
+        }
+    </script>
+    </body>
 </form>
