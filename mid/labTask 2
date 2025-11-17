@@ -98,5 +98,39 @@
        <div id="activities"></div>
     </div>
 
+    <script>
+        function registerUser() {
+            var name = document.getElementById("fullName").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var phone = document.getElementById("phone").value.trim();    
+            var password = document.getElementById("password").value;
+            var confirm = document.getElementById("confirmPassword").value;
 
+            var errorDiv = document.getElementById("error");
+            var successDiv = document.getElementById("success");
+            errorDiv.innerHTML = "";
+            successDiv.innerHTML = "";
+            if (!name || !email || !phone || !password || !confirm) {
+                errorDiv.innerHTML = "All fields are required.";
+                return false;
+            }
+            if (!email.includes("@")) {
+                errorDiv.innerHTML = "Invalid email format.";
+                return false;
+            }
+            if (!/^\[0-9]+$/.test(phone)) {
+                errorDiv.innerHTML = "Invalid phone number.";
+                return false;
+            }
+            if (password !== confirm) {
+                errorDiv.innerHTML = "Passwords do not match.";
+                return false;
+            }
+            successDiv.innerHTML = `Registration successful!<br><br>
+            Name: ${name}<br>
+            Email: ${email}<br>    
+            Phone: ${phone}<br>
+            
+            `;
+            return false;
 </form>
