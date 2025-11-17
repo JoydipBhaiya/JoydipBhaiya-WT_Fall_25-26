@@ -51,4 +51,23 @@
                 text-align: center;
                 margin-top: 10px;
             }
+
+            .activity-item {
+                background-color: #eef4ff;
+                padding: 8px;
+                border-radius: 5px;
+                margin-top: 8px;
+                padding: 8px;
+                display:flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .delete-btn {
+                background-color: #ff4d4d;
+                border: none;
+                color: white;
+                padding: 5px 8px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
     </style>
